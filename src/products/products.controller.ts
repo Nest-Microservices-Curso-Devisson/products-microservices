@@ -1,11 +1,4 @@
 import { Controller,
-   Get, 
-   Post, 
-   Body, 
-   Patch, 
-   Param, 
-   Delete, 
-   Query, 
    ParseIntPipe 
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
@@ -24,13 +17,13 @@ export class ProductsController {
   }
 
   @MessagePattern({ cmd: 'find_all_products' })
-  findAll(@Payload() PaginationDto : PaginationDto) {
-    return this.productsService.findAll(PaginationDto);
+  findAll(@Payload() paginationDto: PaginationDto) {
+    return this.productsService.findAll(paginationDto);
   }
 
   @MessagePattern({ cmd: 'find_one_product' })
   findOne(@Payload('id', ParseIntPipe) id: number) {
-    return this.productsService.findOne(+id);
+    return this.productsService.findOne(id);
   }
 
   @MessagePattern({ cmd: 'update_product' })
